@@ -18,3 +18,8 @@ indent_style = tab
 [{composer.json,.travis.yml}]
 indent_style = space
 indent_size = 4
+
+# C source files use Linux kernel style
+[*.c]
+intent_style = tab
+indent_size = 8

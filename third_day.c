@@ -1,12 +1,10 @@
-#include <stdio.h>
-#include <stdlib.h> // free()
+#include "adventofcode.h"
 
-#define FILENAME "input_third_day"
 // #define FILENAME "example1"
 #define MAX_HOUSES 8200 // based on input
 
-int main() {
-  FILE *input;
+int main(int argc, char const *argv[]){
+  FILE *input = handle_file_by_arg(argc, argv);
   char *line = NULL;
   // size_t is a type that can hold any array index
   size_t len = 0;
@@ -20,12 +18,6 @@ int main() {
 
   xy[x][y] = 1;
   visits = 1;
-
-  input = fopen(FILENAME, "r");
-  if (input == NULL) {
-    perror("FILE");
-    return -1;
-  }
 
   // getline POSIX function (stdio). len need to be a size_t type.
   while ((read = getline(&line, &len, input)) != -1) {
@@ -83,20 +75,20 @@ int main() {
 
       switch(line[i]) {
         case '^':
-          *yp = *yp + 1;
-          break;
+            *yp = *yp + 1;
+            break;
 
         case 'v':
-          *yp = *yp - 1;
-          break;
+            *yp = *yp - 1;
+            break;
 
         case '>':
-          *xp = *xp + 1;
-          break;
+            *xp = *xp + 1;
+            break;
 
         case '<':
-          *xp = *xp - 1;
-          break;
+            *xp = *xp - 1;
+            break;
       }
 
       if (doublexy[*xp][*yp] == 0) {
