@@ -44,5 +44,9 @@ compile:
 run: compile
 	./$(FILE) input/$(FILE)
 
+test: compile
+	./$(FILE) example/$(FILE)
+
 clean:
 	rm -f *.o
+	@ls *.c | cut -d '.' -f1 | xargs rm
