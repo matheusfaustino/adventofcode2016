@@ -3,7 +3,7 @@
 
 # CC=gcc
 CC=clang
-CFLAGS=-Wall -std=c99 -Wextra -g -I/usr/local/opt/openssl/include
+CFLAGS=-Wall -std=c99 -Wextra -g -I /usr/local/opt/openssl/include
 LDFLAGS=-lm  -lcrypto
 
 #all:
@@ -41,10 +41,20 @@ compile:
 	$(CC) $(CFLAGS) -c -o $(FILE).o $(FILE).c
 	$(CC) $(LDFLAGS) -o $(FILE) $(FILE).o adventofcode.c
 
+compile-test:
+	$(CC) $(CFLAGS) -DUNIT_TESTING -c -o ./test/$(FILE)_test.o ./test/$(FILE)_test.c
+	$(CC) $(LDFLAGS) -o ./test/$(FILE)_test ./test/$(FILE)_test.o adventofcode.c
+
+test: compile-test
+	@echo "########################"
+	@echo "#         TEST         #"
+	@echo "########################"
+	./test/$(FILE)_test
+
 run: compile
 	./$(FILE) input/$(FILE)
 
-test: compile
+example: compile
 	./$(FILE) example/$(FILE)
 
 clean:
